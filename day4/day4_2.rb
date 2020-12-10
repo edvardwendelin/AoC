@@ -22,13 +22,13 @@ passport_fields['byr'] = ->(p) {validate_year(p["byr"],1920,2002)}
 passport_fields['iyr'] = ->(p) {validate_year(p["iyr"],2010,2020)}
 passport_fields['eyr'] = ->(p) {validate_year(p["eyr"],2020,2030)}
 passport_fields['ecl'] = ->(p) {ecls.include?(p["ecl"])}
-passport_fields['hcl'] = ->(p) {(p["hcl"] && p["hcl"].length == 7 && p["hcl"].match(/^\#[0-9a-f]{6}$/))}
-passport_fields['hgt'] = ->(p) {(p["hgt"] && p["hgt"].match(/^(1([5-8]\d|9[0-3])cm|(59|6\d|7[0-6])in)$/))}
+passport_fields['hcl'] = ->(p) {(p["hcl"]&.length == 7 && p["hcl"]&.match(/^\#[0-9a-f]{6}$/))}
+passport_fields['hgt'] = ->(p) {(p["hgt"]&.match(/^(1([5-8]\d|9[0-3])cm|(59|6\d|7[0-6])in)$/))}
 passport_fields['pid'] = ->(p) {p["pid"] && p["pid"].match(/^\d{9}$/)}
 
 # Main stuff
 # parse the file, split into individual passport items, clean up data. 
-passports = File.read('/Users/edvard/src/AoC/Day 4/input.txt').split("\n\n").map {|row|row = row.sub("\n"," ")}
+passports = STDIN.read().split("\n\n").map {|row|row = row.sub("\n"," ")}
 
 valid = 0
 for p in passports do
