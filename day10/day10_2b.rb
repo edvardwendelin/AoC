@@ -28,24 +28,23 @@ i = 2
 while i <= max_ones
     if freq.has_key?(i)
         puts "Looking up number of paths for #{i}"
-        graph = Array.new(i) {|j|j+1}
+        graph = Array.new(i+1) {|j|j+1}
+        graph << graph.last+3
         goal = graph.last
         counter = 0
         stack = []
         stack << graph[0]
-
+        
         while !stack.empty?
             x = stack.pop
-
             graph.each do |n|
-                if n > x && n - x < 3
+                if n > x && n - x <= 3
                     stack.push(n)
+                    if (n == goal)
+                        counter+=1
+                    end
                 end
-                if n == goal
-                    counter+=1
-                end
-            end
-             
+            end  
         end
         paths[i] = counter
         puts "Unique paths: #{counter}"
