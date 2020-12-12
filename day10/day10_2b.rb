@@ -7,11 +7,12 @@ freq = {}
 i = 1
 ones = 0
 max_ones = 0
+
 while i < numbers.length()  
     case numbers[i]-numbers[i-1] 
     when 1            
         ones+=1
-    when 3
+    else
         freq[ones]  = 0 unless freq[ones]
         freq[ones]  +=1
         max_ones    = ones if ones > max_ones
@@ -56,7 +57,9 @@ end
 i = 2 
 results = 1
 while i <= max_ones
-    results *= paths[i]**freq[i]
+    if paths[i]
+        results *= paths[i]**freq[i]
+    end
     i+=1
 end
 
