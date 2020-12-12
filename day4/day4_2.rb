@@ -28,7 +28,7 @@ passport_fields['pid'] = ->(p) {p["pid"]&.match(/^\d{9}$/)}
 
 # Main stuff
 # parse the file, split into individual passport items, clean up data. 
-passports = STDIN.read().split("\n\n").map {|row|row = row.sub("\n"," ")}
+passports = STDIN.read().split("\n\n").map {|row|row = row.gsub("\n"," ")}
 
 valid = 0
 for p in passports do
